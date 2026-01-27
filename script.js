@@ -2,14 +2,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const ponto = document.getElementById("ponto");
     const botaoQuieto = document.getElementById("quietoBtn");
+    const startButton = document.getElementById("startButton");
 
     const somFugir = document.getElementById("somFugir");
     const somQuieto = document.getElementById("somQuieto");
     const somClick = document.getElementById("somClick");
+    const somComecar = document.getElementById("somComecar");
+
 
     const mensagemFinal = document.getElementById("mensagemFinal");
 
-    const sons = [somFugir, somQuieto, somClick];
+    const sons = [somFugir, somQuieto, somClick, somComecar];
 
     let podeClicar = false;
     let jogoFinalizado = false;
@@ -45,22 +48,33 @@ document.addEventListener("DOMContentLoaded", () => {
         posicaoAleatoria();
     }
 
+    function iniciarJogo() {
+        jogoIniciado = true;
+        reiniciarJogo();
+    }
+
+    /* ===== BOTÃO START ===== */
+    startButton.addEventListener("click", () => {
+        startButton.style.display = "none";
+        iniciarJogo();
+    });
+
     // estado inicial
     reiniciarJogo();
 
     // ponto foge do mouse
     ponto.addEventListener("mouseenter", () => {
-        if (!podeClicar && !jogoFinalizado) {
-            pararTodosOsSons();
-            somFugir.play();
-            posicaoAleatoria();
-        }
+        if (!jogoIniciado || podeClicar || jogoFinalizado) return;
+
+        pararTodosOsSons();
+        somFugir.play();
+        posicaoAleatoria();
     });
 
     // ponto foge ao tocar - Mobile
 
     ponto.addEventListener("pointerdown", (e) => {
-        if (!podeClicar && !jogoFinalizado) {
+        if (!jogoIniciado || podeClicar || jogoFinalizado) {
             e.preventDefault();
             pararTodosOsSons();
             somFugir.play();
