@@ -10,13 +10,15 @@
 
 <body>
 
-    <button id="startButton">COMEÇAR O TESTE</button>
+    <!-- TELA INICIAL -->
+    <div id="telaInicio">
+        <button id="startButton">COMEÇAR O TESTE</button>
+    </div>
 
-    <div id="conteudo" style="display: none;"> <!-- ESSE DIV AGORA AGRUPA TUDO QUE SÓ APARECE APÓS START -->
+    <!-- CONTEÚDO DO JOGO -->
+    <div id="conteudoJogo" style="display: none;">
         <h1>Apenas não clique no ponto vermelho destacado na tela.</h1>
-
         <button id="quietoBtn">Fique quieto!</button>
-
         <div id="ponto"></div>
 
         <!-- 🔊 SONS -->
@@ -25,6 +27,7 @@
         <audio id="somClick" src="Song/Slc num compensa.mp3"></audio>
         <audio id="somComecar" src="Song/Martelo.wav"></audio>
 
+        <!-- MENSAGEM FINAL -->
         <div id="mensagemFinal">
             <p>Eu disse para você não clicar,<br><strong>Ousadia da gota!</strong></p>
         </div>
@@ -32,6 +35,5 @@
 
     <script src="script.js"></script>
 </body>
-
 
 </html>
