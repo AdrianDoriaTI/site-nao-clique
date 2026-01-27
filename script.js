@@ -23,9 +23,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function posicaoAleatoria() {
-        const padding = 30;
-        const x = Math.random() * (window.innerWidth - padding);
-        const y = Math.random() * (window.innerHeight - padding);
+        const tamanhoPonto = ponto.offsetWidth;
+        const padding = 10;
+
+        const x = Math.random() * (window.innerWidth - tamanhoPonto - padding);
+        const y = Math.random() * (window.innerHeight - tamanhoPonto - padding);
+
         ponto.style.left = `${x}px`;
         ponto.style.top = `${y}px`;
     }
@@ -57,12 +60,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // ponto foge ao tocar - Mobile
 
     ponto.addEventListener("pointerdown", (e) => {
-        if (!pontoPodeSerClicado) {
-            e.preventDefault(); // evita clique real
-            moverPonto();
-            tocarSomTentativa();
+        if (!podeClicar && !jogoFinalizado) {
+            e.preventDefault();
+            pararTodosOsSons();
+            somFugir.play();
+            posicaoAleatoria();
         }
     });
+
 
 
     // botão "Fique quieto"
