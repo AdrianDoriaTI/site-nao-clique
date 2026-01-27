@@ -3,12 +3,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const ponto = document.getElementById("ponto");
     const botaoQuieto = document.getElementById("quietoBtn");
     const startButton = document.getElementById("startButton");
+    const conteudo = document.getElementById("conteudo");
 
     const somFugir = document.getElementById("somFugir");
     const somQuieto = document.getElementById("somQuieto");
     const somClick = document.getElementById("somClick");
     const somComecar = document.getElementById("somComecar");
-
 
     const mensagemFinal = document.getElementById("mensagemFinal");
 
@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let podeClicar = false;
     let jogoFinalizado = false;
     let podeReiniciar = false;
+    let jogoIniciado = false;
 
     function pararTodosOsSons() {
         sons.forEach(som => {
@@ -41,11 +42,17 @@ document.addEventListener("DOMContentLoaded", () => {
         podeClicar = false;
         jogoFinalizado = false;
         podeReiniciar = false;
+        jogoIniciado = false;
 
-        mensagemFinal.style.display = "none";
+        mensagemFinal.classList.remove("show");
         ponto.style.backgroundColor = "red";
 
         posicaoAleatoria();
+        conteudo.style.opacity = 0;
+        setTimeout(() => {
+            conteudo.style.display = "flex";
+            conteudo.style.opacity = 1;
+        }, 100);
     }
 
     function iniciarJogo() {
@@ -55,14 +62,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ===== BOTÃO START ===== */
     startButton.addEventListener("click", () => {
-        startButton.style.display = "none";
-        iniciarJogo();
+        // fade-out do start button
+        startButton.style.opacity = 0;
+        somComecar.play();
+
+        setTimeout(() => {
+            startButton.style.display = "none";
+            conteudo.style.display = "flex";
+            setTimeout(() => {
+                conteudo.style.opacity = 1; // fade-in do conteúdo
+            }, 50);
+            iniciarJogo();
+        }, 500); // tempo do fade-out
     });
 
     // estado inicial
     reiniciarJogo();
 
-    // ponto foge do mouse
+    /* ===== PONTO ===== */
     ponto.addEventListener("mouseenter", () => {
         if (!jogoIniciado || podeClicar || jogoFinalizado) return;
 
@@ -71,20 +88,16 @@ document.addEventListener("DOMContentLoaded", () => {
         posicaoAleatoria();
     });
 
-    // ponto foge ao tocar - Mobile
-
     ponto.addEventListener("pointerdown", (e) => {
-        if (!jogoIniciado || podeClicar || jogoFinalizado) {
-            e.preventDefault();
-            pararTodosOsSons();
-            somFugir.play();
-            posicaoAleatoria();
-        }
+        if (!jogoIniciado || podeClicar || jogoFinalizado) return;
+
+        e.preventDefault();
+        pararTodosOsSons();
+        somFugir.play();
+        posicaoAleatoria();
     });
 
-
-
-    // botão "Fique quieto"
+    /* ===== BOTÃO "FIQUE QUIETO" ===== */
     botaoQuieto.addEventListener("click", () => {
         if (jogoFinalizado) return;
 
@@ -94,24 +107,24 @@ document.addEventListener("DOMContentLoaded", () => {
         ponto.style.backgroundColor = "lime";
     });
 
-    // clique final no ponto
+    /* ===== CLIQUE NO PONTO ===== */
     ponto.addEventListener("click", (e) => {
         if (!podeClicar || jogoFinalizado) return;
 
-        e.stopPropagation(); // 👈 impede o clique de subir para o document
+        e.stopPropagation();
 
         pararTodosOsSons();
         jogoFinalizado = true;
         somClick.play();
-        mensagemFinal.style.display = "flex";
+        ponto.style.backgroundColor = "lime"; 
+        mensagemFinal.classList.add("show");
 
-        // agora SIM pode reiniciar em outro clique
         setTimeout(() => {
             podeReiniciar = true;
         }, 300);
     });
 
-    // clique em qualquer lugar para reiniciar (APÓS final)
+    /* ===== CLIQUE EM QUALQUER LUGAR PARA REINICIAR ===== */
     document.addEventListener("click", () => {
         if (jogoFinalizado && podeReiniciar) {
             reiniciarJogo();

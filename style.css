@@ -35,6 +35,16 @@ h1 {
     background-color: #ff4d4d;
     color: white;
     z-index: 1000;
+    transition: opacity 0.5s ease; /* animação de fade */
+}
+
+#conteudo {
+    display: none; /* escondido inicialmente */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.8s ease; /* fade-in ao aparecer */
 }
 
 #quietoBtn {
@@ -47,6 +57,7 @@ h1 {
     background-color: #ffcc00;
     color: #000;
     font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
 #quietoBtn:hover {
@@ -61,6 +72,8 @@ h1 {
     position: absolute;
     cursor: pointer;
     touch-action: manipulation;
+    z-index: 1;
+    transition: background-color 0.3s ease;
 }
 
 #mensagemFinal {
@@ -68,13 +81,19 @@ h1 {
     inset: 0;
     background: rgba(0, 0, 0, 0.85);
     display: none;
-    /* 👈 ESSENCIAL */
     align-items: center;
     justify-content: center;
     text-align: center;
     font-size: 32px;
     color: white;
     z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+#mensagemFinal.show {
+    display: flex;
+    opacity: 1;
 }
 
 @media (max-width: 768px) {

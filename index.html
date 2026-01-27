@@ -10,25 +10,28 @@
 
 <body>
 
-    <button id="startButton">COMEÇAR o TESTE</button>
+    <button id="startButton">COMEÇAR O TESTE</button>
 
-    <h1>Apenas não clique no ponto vermelho destacado na tela.</h1>
+    <div id="conteudo" style="display: none;"> <!-- ESSE DIV AGORA AGRUPA TUDO QUE SÓ APARECE APÓS START -->
+        <h1>Apenas não clique no ponto vermelho destacado na tela.</h1>
 
-    <button id="quietoBtn">Fique quieto!</button>
+        <button id="quietoBtn">Fique quieto!</button>
 
-    <div id="ponto"></div>
+        <div id="ponto"></div>
 
-    <!-- 🔊 SONS -->
-    <audio id="somFugir" src="Song/Espirro.wav"></audio>
-    <audio id="somQuieto" src="Song/naruto sad.mp3"></audio>
-    <audio id="somClick" src="Song/Slc num compensa.mp3"></audio>
-    <audio id="somComecar" src="Song/Martelo.wav"></audio>
+        <!-- 🔊 SONS -->
+        <audio id="somFugir" src="Song/Espirro.wav"></audio>
+        <audio id="somQuieto" src="Song/naruto sad.mp3"></audio>
+        <audio id="somClick" src="Song/Slc num compensa.mp3"></audio>
+        <audio id="somComecar" src="Song/Martelo.wav"></audio>
 
-    <div id="mensagemFinal">
-        <p>Eu disse para você não clicar,<br><strong>Ousadia da gota!</strong></p>
+        <div id="mensagemFinal">
+            <p>Eu disse para você não clicar,<br><strong>Ousadia da gota!</strong></p>
+        </div>
     </div>
 
     <script src="script.js"></script>
 </body>
+
 
 </html>
