@@ -54,6 +54,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // ponto foge ao tocar - Mobile
+
+    ponto.addEventListener("pointerdown", (e) => {
+        if (!pontoPodeSerClicado) {
+            e.preventDefault(); // evita clique real
+            moverPonto();
+            tocarSomTentativa();
+        }
+    });
+
+
     // botão "Fique quieto"
     botaoQuieto.addEventListener("click", () => {
         if (jogoFinalizado) return;
