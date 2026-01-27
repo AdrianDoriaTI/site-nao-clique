@@ -22,8 +22,8 @@ h1 {
 }
 
 #quietoBtn {
-    padding: 12px 24px;
-    font-size: 16px;
+    padding: 16px 30px;
+    font-size: 18px;
     cursor: pointer;
     margin-bottom: 40px;
     border: none;
@@ -38,8 +38,8 @@ h1 {
 }
 
 #ponto {
-    width: 25px;
-    height: 25px;
+    width: 40px;
+    height: 40px;
     background-color: red;
     border-radius: 50%;
     position: absolute;
@@ -62,9 +62,27 @@ h1 {
 }
 
 @media (max-width: 768px) {
+    body {
+        font-size: 18px;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+        margin-bottom: 30px;
+    }
+
+    #quietoBtn {
+        font-size: 18px;
+        padding: 16px 28px;
+    }
+
     #ponto {
-        width: 70px;
-        height: 70px;
-        font-size: 1.2rem;
+        width: 45px;
+        height: 45px;
+    }
+
+    #mensagemFinal {
+        font-size: 26px;
+        padding: 20px;
     }
 }
