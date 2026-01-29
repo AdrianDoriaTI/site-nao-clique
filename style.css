@@ -65,7 +65,8 @@ h1 {
     color: #000;
     font-weight: bold;
     transition: background-color 0.3s ease;
-    margin: 20px auto 40px auto; /* centraliza e espaço */
+    margin: 20px auto 40px auto;
+    /* centraliza e espaço */
 }
 
 #quietoBtn:hover {
@@ -73,6 +74,7 @@ h1 {
 }
 
 #ponto {
+    touch-action: none;
     width: 40px;
     height: 40px;
     background-color: red;

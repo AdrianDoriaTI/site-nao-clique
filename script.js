@@ -69,16 +69,22 @@ document.addEventListener("DOMContentLoaded", () => {
         posicaoAleatoria();
     });
 
-    /* ===== PONTO - toque/click mobile ===== */
-    ponto.addEventListener("pointerdown", (e) => {
-        if (!jogoIniciado || podeClicar || jogoFinalizado) {
-            e.preventDefault();      // previne comportamento padrão do touch
-            e.stopPropagation();     // 🔹 evita que o clique atravesse para o botão "Fique quieto"
-            pararTodosOsSons();
-            somFugir.play();
-            posicaoAleatoria();
-        }
-    });
+   /* ===== PONTO - toque mobile ===== */
+ponto.addEventListener("pointerdown", (e) => {
+    if (!jogoIniciado || jogoFinalizado) return;
+
+    // 🔴 enquanto o ponto ainda está fugindo
+    if (!podeClicar) {
+        e.stopPropagation();   // impede clique atravessado
+        // ❗ NÃO usar preventDefault aqui
+        pararTodosOsSons();
+        somFugir.play();
+        posicaoAleatoria();
+    }
+    // 🟢 quando podeClicar === true
+    // deixa o evento seguir para o click
+});
+
 
     /* ===== BOTÃO "FIQUE QUIETO" ===== */
     botaoQuieto.addEventListener("click", () => {
